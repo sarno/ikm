@@ -18,7 +18,7 @@ class Team extends JetstreamTeam
      *
      * @var array<int, string>
      */
-    protected $fillable = ["name", "personal_team"];
+    protected $fillable = ['name', 'personal_team'];
 
     /**
      * The event map for the model.
@@ -26,9 +26,9 @@ class Team extends JetstreamTeam
      * @var array<string, class-string>
      */
     protected $dispatchesEvents = [
-        "created" => TeamCreated::class,
-        "updated" => TeamUpdated::class,
-        "deleted" => TeamDeleted::class,
+        'created' => TeamCreated::class,
+        'updated' => TeamUpdated::class,
+        'deleted' => TeamDeleted::class,
     ];
 
     /**
@@ -39,7 +39,7 @@ class Team extends JetstreamTeam
     protected function casts(): array
     {
         return [
-            "personal_team" => "boolean",
+            'personal_team' => 'boolean',
         ];
     }
 }

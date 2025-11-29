@@ -8,7 +8,9 @@ use Maatwebsite\Excel\Concerns\FromView;
 class GroupingRespondenExport implements FromView
 {
     public $items;
+
     public $startDate;
+
     public $endDate;
 
     public function __construct($items, $startDate, $endDate)
@@ -20,10 +22,10 @@ class GroupingRespondenExport implements FromView
 
     public function view(): View
     {
-        return view("exports.ikm.excel-grouping-responden", [
-            "items" => $this->items,
-            "startDate" => $this->startDate,
-            "endDate" => $this->endDate,
+        return view('exports.ikm.excel-grouping-responden', [
+            'items' => $this->items,
+            'startDate' => $this->startDate,
+            'endDate' => $this->endDate,
         ]);
     }
 }

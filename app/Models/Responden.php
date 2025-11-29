@@ -10,31 +10,31 @@ class Responden extends Model
     use HasFactory;
 
     protected $fillable = [
-        "nama",
-        "usia",
-        "gender",
-        "phone",
-        "language",
-        "total_nilai",
-        "tanggal_survey",
-        "user_id",
-        "pelayanan_id",
+        'nama',
+        'usia',
+        'gender',
+        'phone',
+        'language',
+        'total_nilai',
+        'tanggal_survey',
+        'user_id',
+        'pelayanan_id',
     ];
 
-    protected $dates = ["tanggal_survey"];
+    protected $dates = ['tanggal_survey'];
 
     public function jawaban()
     {
         return $this->hasMany(jawaban::class);
     }
 
-    //user
+    // user
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    //pelayanan
+    // pelayanan
     public function pelayanan()
     {
         return $this->belongsTo(Pelayanan::class);

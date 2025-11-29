@@ -24,7 +24,7 @@ return new class extends Migration
             $table->dateTime('subs_date')->nullable();
             $table->dateTime('date_exp')->nullable();
             $table->integer('bulan')->nullable();
-            $table->string('url_domain')->nullable();       
+            $table->string('url_domain')->nullable();
 
             $table->timestamps();
         });

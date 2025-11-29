@@ -30,9 +30,9 @@ class RespondenFactory extends Factory
             User::factory()->create();
         }
 
-        $usiaOptions = ["<17", "18-25", "26-30", "31-40", ">40"];
-        $genderOptions = ["laki-laki", "perempuan"];
-        $languageOptions = ["Indonesia", "عربي"];
+        $usiaOptions = ['<17', '18-25', '26-30', '31-40', '>40'];
+        $genderOptions = ['laki-laki', 'perempuan'];
+        $languageOptions = ['Indonesia', 'عربي'];
 
         return [
             'tanggal_survey' => $this->faker->dateTimeBetween('-1 year', 'now'),

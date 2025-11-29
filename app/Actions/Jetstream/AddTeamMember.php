@@ -24,7 +24,7 @@ class AddTeamMember implements AddsTeamMembers
         string $email,
         ?string $role = null,
     ): void {
-        Gate::forUser($user)->authorize("addTeamMember", $team);
+        Gate::forUser($user)->authorize('addTeamMember', $team);
 
         $this->validate($team, $email, $role);
 
@@ -32,7 +32,7 @@ class AddTeamMember implements AddsTeamMembers
 
         AddingTeamMember::dispatch($team, $newTeamMember);
 
-        $team->users()->attach($newTeamMember, ["role" => $role]);
+        $team->users()->attach($newTeamMember, ['role' => $role]);
 
         TeamMemberAdded::dispatch($team, $newTeamMember);
     }
@@ -44,18 +44,18 @@ class AddTeamMember implements AddsTeamMembers
     {
         Validator::make(
             [
-                "email" => $email,
-                "role" => $role,
+                'email' => $email,
+                'role' => $role,
             ],
             $this->rules(),
             [
-                "email.exists" => __(
-                    "We were unable to find a registered user with this email address.",
+                'email.exists' => __(
+                    'We were unable to find a registered user with this email address.',
                 ),
             ],
         )
             ->after($this->ensureUserIsNotAlreadyOnTeam($team, $email))
-            ->validateWithBag("addTeamMember");
+            ->validateWithBag('addTeamMember');
     }
 
     /**
@@ -66,9 +66,9 @@ class AddTeamMember implements AddsTeamMembers
     protected function rules(): array
     {
         return array_filter([
-            "email" => ["required", "email", "exists:users"],
-            "role" => Jetstream::hasRoles()
-                ? ["required", "string", new Role()]
+            'email' => ['required', 'email', 'exists:users'],
+            'role' => Jetstream::hasRoles()
+                ? ['required', 'string', new Role]
                 : null,
         ]);
     }
@@ -85,8 +85,8 @@ class AddTeamMember implements AddsTeamMembers
                 ->errors()
                 ->addIf(
                     $team->hasUserWithEmail($email),
-                    "email",
-                    __("This user already belongs to the team."),
+                    'email',
+                    __('This user already belongs to the team.'),
                 );
         };
     }

@@ -4,22 +4,22 @@ namespace App\Livewire\Kelolauser;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Attributes\Layout;
-use Livewire\Component;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
 
-#[Layout("layouts.app")]
+#[Layout('layouts.app')]
 class Index extends Component
 {
     public $openModalCreate = false;
 
     public $changePasswordModal = false;
 
-    public $titleModal = "";
+    public $titleModal = '';
 
-    public $changed = "";
+    public $changed = '';
 
     public $nama;
 
@@ -36,20 +36,20 @@ class Index extends Component
     public $deleteAlerts = false;
 
     protected $listeners = [
-        "editItems" => "editItems",
-        "deleteItems" => "deleteItems",
-        "changePassword" => "changePassword",
+        'editItems' => 'editItems',
+        'deleteItems' => 'deleteItems',
+        'changePassword' => 'changePassword',
     ];
 
     public function render()
     {
         $breadcrumbs = [
-            ["url" => "dashboard", "text" => "Home"],
-            ["url" => null, "text" => "Kelola User"],
+            ['url' => 'dashboard', 'text' => 'Home'],
+            ['url' => null, 'text' => 'Kelola User'],
         ];
 
-        return view("livewire.kelolauser.index")->layoutData([
-            "breadcrumbs" => $breadcrumbs,
+        return view('livewire.kelolauser.index')->layoutData([
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -71,16 +71,16 @@ class Index extends Component
             ]);
         } catch (ValidationException $e) {
             $firstErrorMessage = collect($e->errors())->flatten()->first();
-            LivewireAlert::title("Validation Error")
+            LivewireAlert::title('Validation Error')
                 ->text($firstErrorMessage)
                 ->error()
                 ->toast()
-                ->position("top-end")
+                ->position('top-end')
                 ->show();
             throw $e;
         }
 
-        $adduser = new User();
+        $adduser = new User;
         $adduser->name = $this->nama;
         $adduser->email = $this->email;
         $adduser->current_team_id = $this->role;
@@ -89,25 +89,25 @@ class Index extends Component
         $adduser->save();
         $this->openModalCreate = false;
         $this->reset();
-        $this->dispatch("refreshDatatable");
-        LivewireAlert::title("Success")
-            ->text('User "' . $adduser->name . '" berhasil ditambahkan.')
+        $this->dispatch('refreshDatatable');
+        LivewireAlert::title('Success')
+            ->text('User "'.$adduser->name.'" berhasil ditambahkan.')
             ->info()
             ->toast()
-            ->position("top-end")
+            ->position('top-end')
             ->show();
     }
 
     public function editItems($id)
     {
         $this->openModalCreate = true;
-        $this->changed = "updateItems(" . $id . ")";
+        $this->changed = 'updateItems('.$id.')';
         $getDetail = User::find($id);
         $this->nama = $getDetail->name;
         $this->email = $getDetail->email;
         $this->role = $getDetail->current_team_id;
         $this->flag = $getDetail->flag;
-        $this->titleModal = "Edit User : " . $getDetail->name;
+        $this->titleModal = 'Edit User : '.$getDetail->name;
     }
 
     public function updateItems($id)
@@ -121,15 +121,14 @@ class Index extends Component
             ]);
         } catch (ValidationException $e) {
             $firstErrorMessage = collect($e->errors())->flatten()->first();
-            LivewireAlert::title("Validation Error")
+            LivewireAlert::title('Validation Error')
                 ->text($firstErrorMessage)
                 ->error()
                 ->toast()
-                ->position("top-end")
+                ->position('top-end')
                 ->show();
             throw $e;
         }
-
 
         $getDetail = User::find($id);
         $getDetail->name = $this->nama;
@@ -137,12 +136,12 @@ class Index extends Component
         $getDetail->current_team_id = $this->role;
         $getDetail->flag = $this->flag;
         $getDetail->save();
-        $this->dispatch("refreshDatatable");
-        LivewireAlert::title("Success")
-            ->text('User "' . $getDetail->name . '" berhasil di update.')
+        $this->dispatch('refreshDatatable');
+        LivewireAlert::title('Success')
+            ->text('User "'.$getDetail->name.'" berhasil di update.')
             ->info()
             ->toast()
-            ->position("top-end")
+            ->position('top-end')
             ->show();
         $this->reset();
     }
@@ -150,10 +149,10 @@ class Index extends Component
     public function changePassword($id)
     {
         $this->changePasswordModal = true;
-        $this->changed = "updatePassword(" . $id . ")";
+        $this->changed = 'updatePassword('.$id.')';
         $getDetail = User::find($id);
         $this->email = $getDetail->email;
-        $this->titleModal = "Edit Password : " . $getDetail->name;
+        $this->titleModal = 'Edit Password : '.$getDetail->name;
     }
 
     public function updatePassword($id)
@@ -164,11 +163,11 @@ class Index extends Component
             ]);
         } catch (ValidationException $e) {
             $firstErrorMessage = collect($e->errors())->flatten()->first();
-            LivewireAlert::title("Validation Error")
+            LivewireAlert::title('Validation Error')
                 ->text($firstErrorMessage)
                 ->error()
                 ->toast()
-                ->position("top-end")
+                ->position('top-end')
                 ->show();
             throw $e;
         }
@@ -177,12 +176,12 @@ class Index extends Component
         $getDetail->password = Hash::make($this->password);
         $getDetail->save(); // Save the updated password
         // $this->titleModal = "Edit Password : " . $getDetail->name; // This line is not needed here
-        $this->dispatch("refreshDatatable");
-        LivewireAlert::title("Success")
-            ->text('Password User "' . $getDetail->name . '" berhasil update.')
+        $this->dispatch('refreshDatatable');
+        LivewireAlert::title('Success')
+            ->text('Password User "'.$getDetail->name.'" berhasil update.')
             ->info()
             ->toast()
-            ->position("top-end")
+            ->position('top-end')
             ->show();
         $this->reset();
     }
@@ -206,12 +205,12 @@ class Index extends Component
         $getDetail = User::find($id);
 
         $getDetail->delete();
-        $this->dispatch("refreshDatatable");
-        LivewireAlert::title("Success")
-            ->text('User "' . $getDetail->name . '" berhasil di hapus.')
+        $this->dispatch('refreshDatatable');
+        LivewireAlert::title('Success')
+            ->text('User "'.$getDetail->name.'" berhasil di hapus.')
             ->info()
             ->toast()
-            ->position("top-end")
+            ->position('top-end')
             ->show();
         $this->reset();
 
