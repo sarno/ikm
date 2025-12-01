@@ -5,7 +5,7 @@ use App\Livewire\Laporan\Ikm\Index as LaporanIkmIndex;
 use App\Livewire\PelayananManager\Index as PelayananManager;
 use App\Livewire\Pertanyaaan\Index as PertanyaaanIndex;
 use App\Livewire\Responden\Index as RespondenIndex;
-use App\Livewire\Websettings\Index as IndexTentangToko;
+use App\Livewire\WebSettings\Index as IndexTentangToko;
 use App\Livewire\Dashboard\Index as IndexDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Survey\Index as SurveyIndex;
