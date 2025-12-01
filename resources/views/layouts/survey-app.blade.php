@@ -42,7 +42,5 @@
         @stack("modals")
         @stack("add-js")
         @yield("add-js")
-
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>
