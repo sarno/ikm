@@ -394,5 +394,5 @@
         </div>
     @endif
 
-    @livewire("Kelolauser.DataTable")
+    @livewire("Kelolauser.Datatable")
 </div>
