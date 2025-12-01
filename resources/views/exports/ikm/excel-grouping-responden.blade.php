@@ -70,8 +70,14 @@
 @php
     $X = $items->sum("total_nilai");
     $Y = $items->count();
-    $Z = $X / 10 / $Y;
-    $N = (100 / 4) * $Z; // dalam persen
+
+    if ($Y > 0) {
+        $Z = $X / 10 / $Y;
+        $N = (100 / 4) * $Z; // dalam persen
+    } else {
+        $Z = 0;
+        $N = 0;
+    }
 @endphp
 
 <div class="mt-6 text-sm">
