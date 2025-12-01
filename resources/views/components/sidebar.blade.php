@@ -177,7 +177,7 @@
             </li>
             <li class="">
                 <a
-                    href="#"
+                    href="{{ route("survey-index") }}"
                     class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100"
                 >
                     <svg

@@ -8,9 +8,14 @@ use App\Livewire\Responden\Index as RespondenIndex;
 use App\Livewire\Websettings\Index as IndexTentangToko;
 use App\Livewire\Dashboard\Index as IndexDashboard;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Survey\Index as SurveyIndex;
 
 Route::get("/", function () {
     return redirect()->route("dashboard");
+});
+
+Route::group(["prefix" => "/survey"], function (): void {
+    Route::get("/", SurveyIndex::class)->name("survey-index");
 });
 
 Route::middleware([

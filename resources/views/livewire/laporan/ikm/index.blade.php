@@ -146,6 +146,14 @@
                 </button>
             </div>
         </div>
+        <livewire:Laporan.Ikm.GroupingQuestion
+            :key="$startDate . '-' . $endDate . '-' . $selectedPelayanan . '-' . $userId"
+            :startDate="$startDate"
+            :endDate="$endDate"
+            :pelayananMethod="$selectedPelayanan"
+            :userId="$userId"
+        />
+
         <livewire:Laporan.Ikm.GroupingResponden
             :key="$startDate . '-' . $endDate . '-' . $selectedPelayanan . '-' . $userId"
             :startDate="$startDate"

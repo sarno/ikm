@@ -40,16 +40,16 @@
                                 )
                                 this.$wire.set(
                                     'search',
-                                    start.format('YYYY-MM-D') + '/' + end.format('YYYY-MM-D'),
+                                    start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD'),
                                 )
                                 this.$wire.set(
                                     'dateSelect',
-                                    start.format('YYYY-MM-D') + '/' + end.format('YYYY-MM-D'),
+                                    start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD'),
                                 )
                                 this.$wire.call(
                                     'handleDateSelectUpdate',
-                                    start.format('YYYY-MM-D'),
-                                    end.format('YYYY-MM-D'),
+                                    start.format('YYYY-MM-DD'),
+                                    end.format('YYYY-MM-DD'),
                                 )
                             }
                             $('#reportrange').daterangepicker(
@@ -104,6 +104,27 @@
                                     {{ $transaksi->count() }}
                                 </span>
                             </div>
+                            <div>
+                                <span class="mr-auto">
+                                    <svg
+                                        class="h-[65px] w-[65px] text-gray-500"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="48"
+                                        height="48"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.4"
+                                            d="M5 18h14M5 18v3h14v-3M5 18l1-9h12l1 9M16 6v3m-4-3v3m-2-6h8v3h-8V3Zm-1 9h.01v.01H9V12Zm3 0h.01v.01H12V12Zm3 0h.01v.01H15V12Zm-6 3h.01v.01H9V15Zm3 0h.01v.01H12V15Zm3 0h.01v.01H15V15Z"
+                                        />
+                                    </svg>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <!-- tambahkan nilai responden berdasarkan pelayanan -->
@@ -124,6 +145,27 @@
                                         {{ $pelayanan["n_persen"] }} %
                                     </span>
                                 </div>
+                                <div>
+                                    <span class="mr-auto">
+                                        <svg
+                                            class="h-[65px] w-[65px] text-gray-500"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="48"
+                                            height="48"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="1.4"
+                                                d="M13.6 16.733c.234.269.548.456.895.534a1.4 1.4 0 0 0 1.75-.762c.172-.615-.446-1.287-1.242-1.481-.796-.194-1.41-.861-1.241-1.481a1.4 1.4 0 0 1 1.75-.762c.343.077.654.26.888.524m-1.358 4.017v.617m0-5.939v.725M4 15v4m3-6v6M6 8.5 10.5 5 14 7.5 18 4m0 0h-3.5M18 4v3m2 8a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -133,6 +175,60 @@
                 :chartDate="$chartDate"
                 wire:key="$chartDate"
             />
+
+            <!-- <div class="mt-8 border-t pt-8">
+                <h3
+                    class="mb-4 text-center text-lg font-medium text-gray-900"
+                >
+                    NILAI PERTANYAAN IKM
+                </h3>
+                <div
+                    class="mx-auto flex h-96 w-full flex-col items-center justify-center"
+                    x-data="{
+                        init() {
+                            new Chart(document.getElementById('questionChart').getContext('2d'), {
+                                type: 'bar',
+                                data: {
+                                    labels: @js($questionLabels ?? []),
+                                    datasets: [
+                                        {
+                                            label: 'Nilai Persentase (%)',
+                                            data: @js($questionPercentages ?? []),
+                                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                                            borderColor: 'rgba(54, 162, 235, 1)',
+                                            borderWidth: 1,
+                                        },
+                                    ],
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        yAxes: [
+                                            {
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                    max: 100,
+                                                    callback: function (value) {
+                                                        return value + '%'
+                                                    },
+                                                },
+                                            },
+                                        ],
+                                    },
+                                    legend: {
+                                        display: false,
+                                    },
+                                },
+                            })
+                        },
+                    }"
+                    x-init="init()"
+                    wire:ignore
+                >
+                    <canvas id="questionChart"></canvas>
+                </div>
+            </div> -->
         </div>
 
         @push("add-js")

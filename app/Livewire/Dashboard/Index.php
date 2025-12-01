@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Models\Jawaban;
 use App\Models\Pelayanan;
 use App\Models\Responden;
 use Livewire\Attributes\Layout;
@@ -88,9 +89,51 @@ class Index extends Component
             ];
         });
 
+        $jawabans = Jawaban::whereHas("responden", function ($query) use (
+            $startDate,
+            $endDate,
+        ) {
+            $query->whereBetween("tanggal_survey", [$startDate, $endDate]);
+        })
+            ->with("pertanyaan")
+            ->get();
+
+        $questionScores = $jawabans
+            ->groupBy("pertanyaan_id")
+            ->map(function ($group) {
+                $question = $group->first()->pertanyaan; // Get the question model instance
+                $totalScore = $group->sum("score");
+                $answerCount = $group->count();
+
+                if ($answerCount == 0) {
+                    return [
+                        "question" => $question
+                            ? $question->question
+                            : "Unknown Question",
+                        "percentage" => 0,
+                    ];
+                }
+
+                $averageScore = $totalScore / $answerCount;
+                // Assuming max score is 4, as seen in pelayananTotals calc
+                $percentage = ($averageScore / 4) * 100;
+
+                return [
+                    "question" => $question
+                        ? $question->question
+                        : "Unknown Question",
+                    "percentage" => round($percentage, 0),
+                ];
+            });
+
+        $questionLabels = $questionScores->pluck("question");
+        $questionPercentages = $questionScores->pluck("percentage");
+
         return view("livewire.dashboard.index", [
             "transaksi" => $transaksi,
             "pelayananTotals" => $pelayananTotals,
+            "questionLabels" => $questionLabels,
+            "questionPercentages" => $questionPercentages,
         ]);
     }
 }

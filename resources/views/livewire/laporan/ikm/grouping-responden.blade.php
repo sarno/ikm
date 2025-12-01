@@ -1,4 +1,4 @@
-<div class="mt-4">
+<div class="mt-10">
     <div class="relative overflow-x-auto">
         <table
             class="dark:text-gray-400 w-full text-left text-sm text-gray-500 rtl:text-right"
