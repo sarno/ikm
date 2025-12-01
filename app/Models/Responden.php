@@ -10,22 +10,22 @@ class Responden extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
-        'usia',
-        'gender',
-        'phone',
-        'language',
-        'total_nilai',
-        'tanggal_survey',
-        'user_id',
-        'pelayanan_id',
+        "nama",
+        "usia",
+        "gender",
+        "phone",
+        "language",
+        "total_nilai",
+        "tanggal_survey",
+        "user_id",
+        "pelayanan_id",
     ];
 
-    protected $dates = ['tanggal_survey'];
+    protected $dates = ["tanggal_survey"];
 
     public function jawaban()
     {
-        return $this->hasMany(jawaban::class);
+        return $this->hasMany(Jawaban::class);
     }
 
     // user
