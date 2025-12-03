@@ -84,8 +84,6 @@
     </head>
     <body>
         <div class="page-container">{{ $slot }}</div>
-            {{ $slot }}
-        </div>
 
         @livewireScripts
     </body>
