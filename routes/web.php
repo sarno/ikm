@@ -2,6 +2,7 @@
 
 use App\Livewire\Kelolauser\Index as KelolauserIndex;
 use App\Livewire\Laporan\Ikm\Index as LaporanIkmIndex;
+use App\Livewire\LandingPage;
 use App\Livewire\PelayananManager\Index as PelayananManager;
 use App\Livewire\Pertanyaaan\Index as PertanyaaanIndex;
 use App\Livewire\Responden\Index as RespondenIndex;
@@ -10,9 +11,7 @@ use App\Livewire\Dashboard\Index as IndexDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Survey\Index as SurveyIndex;
 
-Route::get("/", function () {
-    return redirect()->route("dashboard");
-});
+Route::get("/", LandingPage::class)->name("landing-page");
 
 Route::group(["prefix" => "/survey"], function (): void {
     Route::get("/", SurveyIndex::class)->name("survey-index");
