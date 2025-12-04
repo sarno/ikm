@@ -62,6 +62,18 @@
             </div>
         @endif
 
+        @if ($step > 0 && $step < 6)
+            <div class="mb-4">
+                <button
+                    type="button"
+                    wire:click="previousStep"
+                    class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                >
+                    {{ $selectedLanguage === "id" ? "Kembali" : "رجوع" }}
+                </button>
+            </div>
+        @endif
+
         {{-- Step 0: Welcome Page --}}
         @if ($step == 0)
             <div class="text-center p-10">
@@ -74,7 +86,10 @@
                     class="text-3xl font-bold text-gray-800 dark:text-white mb-6"
                     dir="rtl"
                 >
-                    أهلاً وسهلاً بكم في خدمات سفارة إندونيسيا بدمشق
+                    يسرُّنا أن نُرحِّب بكم في استطلاع مستوى رضا المستفيدين.
+                    ونقدِّر مشاركتكم الكريمة في تقييم جودة الخدمات التي نقدّمها،
+                    وذلك بهدف الارتقاء المستمر بمستوى الأداء وتحسين نشكر لكم
+                    تعاونكم وثقتكم.
                 </h2>
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
                     Berikan penilaian terhadap pelayanan kami dengan menekan
@@ -90,7 +105,7 @@
                     wire:click="startSurvey()"
                     class="mt-8 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
-                    Mulai Survei / ابدأ الاستبيان
+                    Mulai Survey <br> البدء في الاستبيان
                 </button>
             </div>
         @endif
@@ -139,6 +154,14 @@
                             </h5>
                         </button>
                     @endforeach
+                </div>
+                <div class="flex justify-start mt-4">
+                    <button
+                        wire:click="previousStep"
+                        class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                    >
+                        {{ $selectedLanguage === "id" ? "Kembali" : "رجوع" }}
+                    </button>
                 </div>
             </div>
         @endif
@@ -248,7 +271,14 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         />
                     </div>
-                    <div class="text-right">
+                    <div class="flex justify-between">
+                        <button
+                            type="button"
+                            wire:click="previousStep"
+                            class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                        >
+                            {{ $selectedLanguage === "id" ? "Kembali" : "رجوع" }}
+                        </button>
                         <button
                             type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
@@ -296,16 +326,34 @@
                             {{ $selectedLanguage === "id" ? "Sangat Tidak Puas" : "غير راض جدا" }}
                         </button>
                     </div>
+                    <div class="flex justify-start mt-4">
+                        <button
+                            type="button"
+                            wire:click="previousStep"
+                            class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                        >
+                            {{ $selectedLanguage === "id" ? "Kembali" : "رجوع" }}
+                        </button>
+                    </div>
                 @else
                     <p>
                         {{ $selectedLanguage === "id" ? "Tidak ada pertanyaan untuk layanan ini." : "لا توجد أسئلة لهذه الخدمة." }}
                     </p>
-                    <button
-                        wire:click="$set('step', 5)"
-                        class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                    >
-                        {{ $selectedLanguage === "id" ? "Lanjut ke Kritik & Saran" : "الانتقال إلى النقد والاقتراحات" }}
-                    </button>
+                    <div class="flex justify-between mt-4">
+                        <button
+                            type="button"
+                            wire:click="previousStep"
+                            class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                        >
+                            {{ $selectedLanguage === "id" ? "Kembali" : "رجوع" }}
+                        </button>
+                        <button
+                            wire:click="$set('step', 5)"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                            {{ $selectedLanguage === "id" ? "Lanjut ke Kritik & Saran" : "الانتقال إلى النقد والاقتراحات" }}
+                        </button>
+                    </div>
                 @endif
             </div>
         @endif
@@ -347,7 +395,14 @@
                             placeholder="{{ $selectedLanguage === "id" ? "Sampaikan saran Anda..." : "اكتب اقتراحاتك..." }}"
                         ></textarea>
                     </div>
-                    <div class="text-right">
+                    <div class="flex justify-between">
+                        <button
+                            type="button"
+                            wire:click="previousStep"
+                            class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                        >
+                            {{ $selectedLanguage === "id" ? "Kembali" : "رجوع" }}
+                        </button>
                         <button
                             type="submit"
                             class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800"

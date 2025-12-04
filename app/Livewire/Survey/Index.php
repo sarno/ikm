@@ -118,6 +118,22 @@ class Index extends Component
         $this->step = 6; // Thank you page
     }
 
+    public function previousStep()
+    {
+        if ($this->step == 4) {
+            $this->step = 3;
+        } elseif ($this->step == 3) {
+            $this->step = 2;
+        } elseif ($this->step == 2) {
+            $this->step = 1;
+        } elseif ($this->step == 1) {
+            $this->step = 0;
+        } elseif ($this->step == 5) {
+            $this->step = 4;
+            $this->currentPertanyaanIndex = count($this->pertanyaans) - 1; // Go back to the last question
+        }
+    }
+
     public function render()
     {
         return view("livewire.survey.index");

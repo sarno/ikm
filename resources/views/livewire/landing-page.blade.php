@@ -31,21 +31,56 @@
             <div
                 class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none"
             >
-                <h1 class="mb-1 font-medium text-2xl">
-                    Survei Kepuasan Masyarakat
-                </h1>
-                <p class="mb-4 text-[#706f6c] dark:text-[#A1A09A]">
-                    Bantu kami meningkatkan kualitas layanan dengan mengisi
-                    survei kepuasan masyarakat. Partisipasi Anda sangat berarti
-                    bagi kami untuk memberikan pelayanan yang lebih baik.
-                </p>
-                <ul class="flex gap-3 text-sm leading-normal">
+                <div class="flex gap-4 mb-4">
+                    <button
+                        wire:click="$set('lang', 'id')"
+                        class="{{ $lang == "id" ? "font-bold" : "" }}"
+                    >
+                        Indonesia
+                    </button>
+                    <button
+                        wire:click="$set('lang', 'ar')"
+                        class="{{ $lang == "ar" ? "font-bold" : "" }}"
+                    >
+                        العربية
+                    </button>
+                </div>
+
+                @if ($lang == "id")
+                    <h1 class="mb-1 font-medium text-2xl">
+                        Survei Kepuasan Masyarakat
+                    </h1>
+                    <p class="mb-4 text-[#706f6c] dark:text-[#A1A09A]">
+                        Bantu kami meningkatkan kualitas layanan dengan mengisi
+                        survei kepuasan masyarakat. Partisipasi Anda sangat
+                        berarti bagi kami untuk memberikan pelayanan yang lebih
+                        baik.
+                    </p>
+                @else
+                    <h1 class="mb-1 font-medium text-2xl text-right" dir="rtl">
+                        استطلاع رضا المجتمع
+                    </h1>
+                    <p
+                        class="mb-4 text-[#706f6c] dark:text-[#A1A09A] text-right"
+                        dir="rtl"
+                    >
+                        ساعدنا في تحسين جودة خدماتنا من خلال ملء استبيان رضا
+                        المجتمع. مشاركتكم تعني الكثير لنا لتقديم خدمة أفضل.
+                    </p>
+                @endif
+                <ul
+                    class="flex gap-3 text-sm leading-normal @if($lang == 'ar') justify-end @endif"
+                >
                     <li>
                         <a
                             href="{{ route("survey-index") }}"
                             class="inline-block dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white hover:bg-black hover:border-black px-5 py-1.5 bg-[#1b1b18] rounded-sm border border-black text-white text-sm leading-normal"
                         >
-                            Mulai Survey
+                            @if ($lang == "id")
+                                Mulai Survey
+                            @else
+                                    ابدأ الاستطلاع
+                            @endif
                         </a>
                     </li>
                 </ul>
