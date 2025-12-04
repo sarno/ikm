@@ -62,18 +62,6 @@
             </div>
         @endif
 
-        @if ($step > 0 && $step < 6)
-            <div class="mb-4">
-                <button
-                    type="button"
-                    wire:click="previousStep"
-                    class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-                >
-                    {{ $selectedLanguage === "id" ? "Kembali" : "رجوع" }}
-                </button>
-            </div>
-        @endif
-
         {{-- Step 0: Welcome Page --}}
         @if ($step == 0)
             <div class="text-center p-10">
@@ -105,7 +93,9 @@
                     wire:click="startSurvey()"
                     class="mt-8 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
-                    Mulai Survey <br> البدء في الاستبيان
+                    Mulai Survey
+                    <br />
+                    البدء في الاستبيان
                 </button>
             </div>
         @endif
@@ -298,32 +288,32 @@
             >
                 @if (isset($pertanyaans[$currentPertanyaanIndex]))
                     <h2 class="text-3xl font-bold mb-6">
-                        {{ $pertanyaans[$currentPertanyaanIndex]->question }}
+                        {{ $selectedLanguage === "ar" ? $pertanyaans[$currentPertanyaanIndex]->question_ar : $pertanyaans[$currentPertanyaanIndex]->question }}
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <button
                             wire:click="answer(4)"
                             class="p-6 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 text-xl"
                         >
-                            {{ $selectedLanguage === "id" ? "Sangat Puas" : "راض جدا" }}
+                            {{ $selectedLanguage === "id" ? "Sangat Puas" : "جيد جدا" }}
                         </button>
                         <button
                             wire:click="answer(3)"
                             class="p-6 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 text-xl"
                         >
-                            {{ $selectedLanguage === "id" ? "Puas" : "راض" }}
+                            {{ $selectedLanguage === "id" ? "Puas" : "جيد" }}
                         </button>
                         <button
                             wire:click="answer(2)"
                             class="p-6 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 text-xl"
                         >
-                            {{ $selectedLanguage === "id" ? "Tidak Puas" : "غير راض" }}
+                            {{ $selectedLanguage === "id" ? "Tidak Puas" : "سيئة" }}
                         </button>
                         <button
                             wire:click="answer(1)"
                             class="p-6 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 text-xl"
                         >
-                            {{ $selectedLanguage === "id" ? "Sangat Tidak Puas" : "غير راض جدا" }}
+                            {{ $selectedLanguage === "id" ? "Sangat Tidak Puas" : "سيئة للغاية" }}
                         </button>
                     </div>
                     <div class="flex justify-start mt-4">
