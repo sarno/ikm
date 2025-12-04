@@ -69,7 +69,7 @@
                     <img
                         src="{{ url("/logo.png") }}"
                         alt="Logo Mixgreen"
-                        class="mx-auto inline-block h-16"
+                        class="mx-auto inline-block h-20"
                     />
                 </div>
                 <h2
