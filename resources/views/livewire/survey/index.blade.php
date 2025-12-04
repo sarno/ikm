@@ -65,19 +65,27 @@
         {{-- Step 0: Welcome Page --}}
         @if ($step == 0)
             <div class="text-center p-10">
+                <div class="text-center">
+                    <img
+                        src="{{ url("/logo.png") }}"
+                        alt="Logo Mixgreen"
+                        class="mx-auto inline-block h-24"
+                    />
+                </div>
                 <h2
-                    class="text-3xl font-bold text-gray-800 dark:text-white mb-4"
+                    class="text-3xl font-bold text-gray-800 dark:text-white mb-4 mt-6"
                 >
                     Selamat Datang di Pelayanan KBRI Damaskus
                 </h2>
                 <h2
-                    class="text-3xl font-bold text-gray-800 dark:text-white mb-6"
-                    dir="rtl"
+                    class="text-3xl font-bold text-gray-800 dark:text-white mb-4 mt-6"
                 >
-                    يسرُّنا أن نُرحِّب بكم في استطلاع مستوى رضا المستفيدين.
-                    ونقدِّر مشاركتكم الكريمة في تقييم جودة الخدمات التي نقدّمها،
-                    وذلك بهدف الارتقاء المستمر بمستوى الأداء وتحسين نشكر لكم
-                    تعاونكم وثقتكم.
+                    <marquee direction="right">
+                        يسرُّنا أن نُرحِّب بكم في استطلاع مستوى رضا المستفيدين.
+                        ونقدِّر مشاركتكم الكريمة في تقييم جودة الخدمات التي
+                        نقدّمها، وذلك بهدف الارتقاء المستمر بمستوى الأداء وتحسين
+                        نشكر لكم تعاونكم وثقتكم.
+                    </marquee>
                 </h2>
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
                     Berikan penilaian terhadap pelayanan kami dengan menekan
