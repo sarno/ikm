@@ -84,7 +84,7 @@
             <!-- Kiri -->
             <div>
                 <label class="block font-medium text-gray-900">
-                    Laporan Penjualan
+                    Laporan IKM
                 </label>
                 <small>
                     Periode :
