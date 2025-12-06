@@ -9,23 +9,37 @@ use App\Models\Responden;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout("layouts.survey-app")]
+#[Layout('layouts.survey-app')]
 class Index extends Component
 {
     public $step = 0; // Step 0: Welcome page
+
     public $selectedLanguage;
+
     public $pelayanans;
+
     public $selectedPelayanan;
+
     public $nama;
+
     public $usia;
+
     public $gender;
+
     public $phone;
+
     public $language;
+
     public $pertanyaans;
+
     public $currentPertanyaanIndex = 0;
+
     public $answers = [];
+
     public $saran;
+
     public $kritik;
+
     public $totalNilai = 0;
 
     public function startSurvey()
@@ -37,8 +51,8 @@ class Index extends Component
     {
         $this->selectedLanguage = $language;
         $this->language = $language;
-        $nameColumn = $language === "ar" ? "name_ar as name" : "name";
-        $this->pelayanans = Pelayanan::select("id", $nameColumn)->get();
+        $nameColumn = $language === 'ar' ? 'name_ar as name' : 'name';
+        $this->pelayanans = Pelayanan::select('id', $nameColumn)->get();
         $this->step = 2;
     }
 
@@ -46,9 +60,9 @@ class Index extends Component
     {
         $this->selectedPelayanan = Pelayanan::findOrFail($pelayananId);
         $questionColumn =
-            $this->selectedLanguage === "ar" ? "question_ar as question" : "question";
-        $this->pertanyaans = Pertanyaan::where("pelayanan_id", $pelayananId)
-            ->select("id", $questionColumn)
+            $this->selectedLanguage === 'ar' ? 'question_ar as question' : 'question';
+        $this->pertanyaans = Pertanyaan::where('pelayanan_id', $pelayananId)
+            ->select('id', $questionColumn)
             ->get();
         $this->step = 3;
     }
@@ -56,10 +70,10 @@ class Index extends Component
     public function saveRespondenData()
     {
         $this->validate([
-            "nama" => "required|string|max:255",
-            "usia" => "required|in:<17,18-25,26-30,31-40,>40",
-            "gender" => "required|in:laki-laki,perempuan",
-            "phone" => "nullable|string",
+            'nama' => 'required|string|max:255',
+            'usia' => 'required|in:<17,18-25,26-30,31-40,>40',
+            'gender' => 'required|in:laki-laki,perempuan',
+            'phone' => 'nullable|string',
         ]);
 
         $this->step = 4;
@@ -81,37 +95,37 @@ class Index extends Component
     public function finish()
     {
         $this->validate([
-            "kritik" => "nullable|string",
-            "saran" => "nullable|string",
+            'kritik' => 'nullable|string',
+            'saran' => 'nullable|string',
         ]);
 
         $responden = Responden::create([
-            "nama" => $this->nama,
-            "usia" => $this->usia,
-            "gender" => $this->gender,
-            "phone" => $this->phone,
-            "language" => $this->language,
-            "total_nilai" => $this->totalNilai,
-            "tanggal_survey" => now(),
-            "user_id" => auth()->user()?->id ?? 1,
-            "pelayanan_id" => $this->selectedPelayanan->id,
+            'nama' => $this->nama,
+            'usia' => $this->usia,
+            'gender' => $this->gender,
+            'phone' => $this->phone,
+            'language' => $this->language,
+            'total_nilai' => $this->totalNilai,
+            'tanggal_survey' => now(),
+            'user_id' => auth()->user()?->id ?? 1,
+            'pelayanan_id' => $this->selectedPelayanan->id,
         ]);
 
         foreach ($this->pertanyaans as $index => $pertanyaan) {
             Jawaban::create([
-                "responden_id" => $responden->id,
-                "pertanyaan_id" => $pertanyaan->id,
-                "score" => $this->answers[$index],
+                'responden_id' => $responden->id,
+                'pertanyaan_id' => $pertanyaan->id,
+                'score' => $this->answers[$index],
             ]);
         }
 
         $lastJawaban = $responden
             ->jawaban()
-            ->orderBy("id", "desc")
+            ->orderBy('id', 'desc')
             ->first();
         if ($lastJawaban) {
             $lastJawaban->saran =
-                "Kritik: " . $this->kritik . "\nSaran: " . $this->saran;
+                'Kritik: '.$this->kritik."\nSaran: ".$this->saran;
             $lastJawaban->save();
         }
 
@@ -136,6 +150,6 @@ class Index extends Component
 
     public function render()
     {
-        return view("livewire.survey.index");
+        return view('livewire.survey.index');
     }
 }

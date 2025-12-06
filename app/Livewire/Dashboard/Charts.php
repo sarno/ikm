@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Dashboard;
 
-use App\Models\Order\Dts;
-use App\Models\Order\Hds;
 use App\Models\Pelayanan;
 use Carbon\Carbon;
 use Livewire\Attributes\Lazy;
@@ -20,13 +18,13 @@ class Charts extends Component
 
     public $laba = [];
 
-    protected $listeners = ["refreshChart" => "refreshChart"];
+    protected $listeners = ['refreshChart' => 'refreshChart'];
 
     public function refreshChart($newChartDate)
     {
         $this->chartDate = $newChartDate;
 
-        [$start, $end] = explode("/", $newChartDate);
+        [$start, $end] = explode('/', $newChartDate);
 
         $start = Carbon::parse($start);
         $end = Carbon::parse($end);
@@ -36,16 +34,15 @@ class Charts extends Component
         foreach (
             new \DatePeriod(
                 $start,
-                new \DateInterval("P1D"),
+                new \DateInterval('P1D'),
                 $end->copy()->addDay(),
-            )
-            as $d
+            ) as $d
         ) {
-            $this->dateRange[] = $d->format("Y-m-d");
+            $this->dateRange[] = $d->format('Y-m-d');
         }
 
         // Ambil semua pelayanan
-        $pelayanans = Pelayanan::with("respondens")->get();
+        $pelayanans = Pelayanan::with('respondens')->get();
 
         $this->datasets = [];
 
@@ -55,10 +52,10 @@ class Charts extends Component
             foreach ($this->dateRange as $date) {
                 $respondens = $p
                     ->respondens()
-                    ->whereDate("tanggal_survey", $date)
+                    ->whereDate('tanggal_survey', $date)
                     ->get();
 
-                $X = $respondens->sum("total_nilai");
+                $X = $respondens->sum('total_nilai');
                 $Y = $respondens->count();
 
                 if ($Y > 0) {
@@ -73,17 +70,18 @@ class Charts extends Component
             }
 
             $this->datasets[] = [
-                "label" => $p->name,
-                "data" => $dataPerTanggal,
+                'label' => $p->name,
+                'data' => $dataPerTanggal,
             ];
         }
 
         $this->dispatch(
-            "updatePelayananDailyChart",
+            'updatePelayananDailyChart',
             dateRange: $this->dateRange,
             datasets: $this->datasets,
         );
     }
+
     public function placeholder()
     {
         return <<<'HTML'
@@ -97,9 +95,9 @@ class Charts extends Component
 
     public function render()
     {
-        return view("livewire.dashboard.charts", [
-            "dateRange" => $this->dateRange ?? [],
-            "datasets" => $this->datasets ?? [],
+        return view('livewire.dashboard.charts', [
+            'dateRange' => $this->dateRange ?? [],
+            'datasets' => $this->datasets ?? [],
         ]);
     }
 }

@@ -21,12 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::directive("currency", function ($expression) {
+        Blade::directive('currency', function ($expression) {
             return "<?php echo number_format($expression,0,',','.'); ?>";
         });
 
-        config(["app.locale" => "id"]);
-        Carbon::setLocale("id");
-        date_default_timezone_set("Asia/Jakarta");
+        config(['app.locale' => 'id']);
+        Carbon::setLocale('id');
+        date_default_timezone_set('Asia/Jakarta');
     }
 }

@@ -24,28 +24,28 @@ class GroupingQuestion extends Component
         $this->endDate = $endDate;
         $this->pelayananMethod = $pelayananMethod;
         $this->userId = $userId;
-        $this->dataItems = Jawaban::whereHas("responden", function ($q) {
-            $q->whereBetween("tanggal_survey", [
-                $this->startDate . " 00:00:00",
-                $this->endDate . " 23:59:59",
+        $this->dataItems = Jawaban::whereHas('responden', function ($q): void {
+            $q->whereBetween('tanggal_survey', [
+                $this->startDate.' 00:00:00',
+                $this->endDate.' 23:59:59',
             ])
                 ->when(
-                    $this->pelayananMethod != "All",
-                    fn($query) => $query->where(
-                        "pelayanan_id",
+                    $this->pelayananMethod != 'All',
+                    fn ($query) => $query->where(
+                        'pelayanan_id',
                         $this->pelayananMethod,
                     ),
                 )
                 ->when(
-                    $this->userId != "All",
-                    fn($query) => $query->where("user_id", $this->userId),
+                    $this->userId != 'All',
+                    fn ($query) => $query->where('user_id', $this->userId),
                 );
         })->get();
     }
 
     public function render()
     {
-        return view("livewire.laporan.ikm.grouping-question");
+        return view('livewire.laporan.ikm.grouping-question');
     }
 
     public function placeholder()
